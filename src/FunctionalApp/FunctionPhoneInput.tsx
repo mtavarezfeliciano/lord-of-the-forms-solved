@@ -1,14 +1,17 @@
 import React, { ChangeEventHandler, createRef, useState } from "react";
 import { PhoneInputProps } from "../types";
 
-export const FunctionalPhoneInput = ({ phoneNumber, phoneNumberChange }: PhoneInputProps) => {
-    const phoneNumberRefs = phoneNumber.map(() => 
-        createRef<HTMLInputElement>()
-    );
+export const FunctionalPhoneInput = ({
+  phoneNumber,
+  phoneNumberChange,
+}: PhoneInputProps) => {
+  const phoneNumberRefs = phoneNumber.map(() => createRef<HTMLInputElement>());
 
-    const [phoneInputVariable, setPhoneInputVariable] = useState([...phoneNumber]);
+  const [phoneInputVariable, setPhoneInputVariable] = useState([
+    ...phoneNumber,
+  ]);
 
-    const onInputChange =
+  const onInputChange =
     (index: number): ChangeEventHandler<HTMLInputElement> =>
     (e) => {
       const value = e.target.value;
@@ -19,16 +22,11 @@ export const FunctionalPhoneInput = ({ phoneNumber, phoneNumberChange }: PhoneIn
           if (index > 0) {
             phoneNumberRefs[index - 1].current?.focus();
           }
-        } else if (
-          value.length === 2 &&
-          index < phoneNumberRefs.length - 1
-        ) {
+        } else if (value.length === 2 && index < phoneNumberRefs.length - 1) {
           phoneNumberRefs[index + 1].current?.focus();
         }
 
-        const newPhoneNumber = phoneNumberRefs.map(
-          (ref) => ref.current?.value
-        );
+        const newPhoneNumber = phoneNumberRefs.map((ref) => ref.current?.value);
         phoneNumberChange(newPhoneNumber as string[]);
       }
     };
@@ -48,9 +46,7 @@ export const FunctionalPhoneInput = ({ phoneNumber, phoneNumberChange }: PhoneIn
               ref={ref}
               onChange={onInputChange(index)}
             />
-            {index < 3 && (
-              <span className="phone-input-dash">-</span>
-            )}
+            {index < 3 && <span className="phone-input-dash">-</span>}
           </React.Fragment>
         ))}
       </div>
