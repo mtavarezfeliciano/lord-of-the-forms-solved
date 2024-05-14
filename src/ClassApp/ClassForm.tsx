@@ -158,8 +158,9 @@ export class ClassForm extends Component<UserFormData> {
             label={"City"}
             inputProps={{
               type: "text",
-              placeholder: "City",
+              placeholder: "Hobbiton",
               value: city,
+              list: "cities",
               onChange: ({ target: { value } }) => {
                 this.setState({
                   city: preventKeyingNumbers(value),
@@ -189,8 +190,6 @@ export class ClassForm extends Component<UserFormData> {
             />
           )}
         </div>
-
-        <ErrorMessage message={phoneNumberErrorMessage} show={true} />
 
         <input type="submit" value="Submit" />
       </form>
