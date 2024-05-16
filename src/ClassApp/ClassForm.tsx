@@ -173,7 +173,7 @@ export class ClassForm extends Component<UserFormData> {
         {this.state.isSubmitted && !isCityValid(city) && (
           <ErrorMessage
             message={cityErrorMessage}
-            show={true}
+            show={true} //JON PLS IT WORKS
           />
         )}
 
